@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS practice</title>
+    <script>
+        function getChoice(){
+            var ajaxString = ''
+            var x= document.getElementById("string").value
+            var choice=document.getElementById("operations").value
+            if (choice==="length"){
+                document.getElementById("output").innerHTML ="The length of input string is: " + x.length  
+
+            }
+            if (choice==="trim")
+            document.getElementById("output").innerHTML ="String after trim() operation is : " + x.trim()  
+            
+             if (choice==="upper"){
+                document.getElementById("output").innerHTML ="String after toUpperCase() operation is : " + x.toUpperCase()  
+             }
+             if (choice==="lower"){
+                document.getElementById("output").innerHTML ="String after toLowerCase() operation is : " + x.toLowerCase()  
+             }
+             if (choice==="Ajax"){
+                
+            var request = new XMLHttpRequest();
+                 request.open("GET","http://localhost/projects/index.txt")
+                 request.send();
+                 request.onreadystatechange = function() {
+                 if(this.readyState === 4 && this.status === 200){
+                     alert("In Function")
+                     alert(this.responseText)
+                     ajaxString = this.responseText
+                     alert(ajaxString)
+                     $('#output').append(ajaxString)
+                 }
+            
+                 
+                } 
+        }
+    }
+       
+    </script>
+
+</head>
+
+<body>
+    <form>
+    <label for="stirng">Enter a string:</label>
+    <input type="text" id="string" name="string">
+    
+    <label for="operation">Choose a string operation:</label>
+    <select id="operations" name="operations" onchange="getChoice()">
+        
+        <option>Choose operations </option>
+        <option value="length">Find the length of input string</option>
+        <option value="trim">Remove white spaces from a string</option>
+        <option value="upper">Change input string to upper case letters</option>
+        <option value="lower">Change input string to lower case letters</option>
+        <option value="Ajax">ajax selection</option>
+    </select>
+    
+
+   <p id="output"></p>
+
+    
+
+</body>
+
+</html>
